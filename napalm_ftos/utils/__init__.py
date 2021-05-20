@@ -27,7 +27,12 @@ def canonical_interface_name(iface):
     iface = can_iface_name(iface)
 
     # add whitespace in *GigabitEthernet names
-    m = re.search(r'^((?:Forty|Ten)GigabitEthernet)(\d+\/\d+)$', iface)
+    m = re.search(r'^((?:Hundred|TwentyFive|Forty|Ten)GigabitEthernet)(.+)$', iface)
+    if m:
+        iface = ' '.join(m.groups())
+
+    # add whitespace to Virtual names
+    m = re.search(r'(Port-channel|Vlan|Loopback)(\d+)', iface)
     if m:
         iface = ' '.join(m.groups())
 

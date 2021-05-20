@@ -292,6 +292,7 @@ class FTOSDriver(NetworkDriver):
         lldp = {}
         neighbors_detail = self.get_lldp_neighbors_detail()
         for intf_name, entries in neighbors_detail.items():
+            intf_name = canonical_interface_name(intf_name)
             lldp[intf_name] = []
             for lldp_entry in entries:
                 hostname = lldp_entry['remote_system_name']
